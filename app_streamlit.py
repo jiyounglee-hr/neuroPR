@@ -237,7 +237,7 @@ if page == "📰 뉴스 목록":
     keyword = st.sidebar.text_input("검색어", value="뉴로핏")
     period = st.sidebar.selectbox(
         "검색 기간",
-        ["선택", "1주일", "2주일", "1개월", "3개월", "6개월", "1년", "직접입력"]
+        ["1주일", "2주일", "1개월", "3개월", "6개월", "1년", "직접입력"]
     )
 
     if period == "직접입력":
@@ -250,6 +250,13 @@ if page == "📰 뉴스 목록":
         end_date = end_date.strftime("%Y.%m.%d")
     else:
         start_date, end_date = get_date_range(period)
+
+    # 최초 로딩 시 1주일치 뉴스 자동 검색
+    if 'first_load' not in st.session_state:
+        st.session_state.first_load = True
+        with st.spinner("뉴스를 검색하고 있습니다..."):
+            news_data = crawl_news(keyword, start_date, end_date)
+            st.session_state.news_data = news_data
 
     if st.sidebar.button("뉴스 검색"):
         with st.spinner("뉴스를 검색하고 있습니다..."):
