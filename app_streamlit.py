@@ -349,7 +349,7 @@ if page == "📰 뉴스 목록":
                 font-weight: bold;
                 padding: 8px;
                 border: 1px solid #ddd;
-                text-align: left;
+                text-align: left !important;
             }
             td {
                 padding: 8px;
@@ -360,6 +360,9 @@ if page == "📰 뉴스 목록":
             }
             tr:hover {
                 background-color: #f5f5f5;
+            }
+            tr {
+                text-align: left !important;
             }
             </style>
         """, unsafe_allow_html=True)
