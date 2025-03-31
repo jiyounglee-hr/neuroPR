@@ -112,8 +112,8 @@ def crawl_news(keyword, start_date, end_date):
                     # 날짜 범위 체크
                     if start_date and end_date:
                         start = datetime.strptime(start_date, "%Y.%m.%d")
-                        end = datetime.strptime(end_date, "%Y.%m.%d")
-                        if not (start <= pub_date <= end):
+                        end = datetime.strptime(end_date, "%Y.%m.%d") + timedelta(days=1)  # 종료일의 다음날 00:00까지 포함
+                        if not (start <= pub_date < end):  # 종료일 다음날 00:00 미만까지 포함
                             continue
                     
                     # URL을 매체명으로 사용하고 www.와 .com 등 제거
