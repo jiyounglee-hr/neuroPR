@@ -8,9 +8,28 @@ import os
 from dotenv import load_dotenv
 import openai
 import io
+import time
+import threading
 
 # 환경 변수 로드
 load_dotenv()
+
+# 앱 깨우기 함수
+def keep_alive():
+    while True:
+        try:
+            # 현재 시간을 sidebar에 업데이트 (보이지 않게)
+            placeholder = st.sidebar.empty()
+            placeholder.markdown(f"<div style='display: none;'>{datetime.now()}</div>", unsafe_allow_html=True)
+            time.sleep(60)  # 1분마다 실행
+        except:
+            continue
+
+# 백그라운드에서 keep_alive 함수 실행
+if 'keep_alive_thread' not in st.session_state:
+    keep_alive_thread = threading.Thread(target=keep_alive, daemon=True)
+    keep_alive_thread.start()
+    st.session_state.keep_alive_thread = keep_alive_thread
 
 # 네이버 API 키 설정
 NAVER_CLIENT_ID = st.secrets["NAVER_CLIENT_ID"]
