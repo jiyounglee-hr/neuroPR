@@ -152,7 +152,7 @@ def crawl_news(keyword, start_date, end_date):
                         press = "알 수 없음"
                     
                     news_list.append({
-                        "제목": item["title"].replace("<b>", "").replace("</b>", ""),
+                        "제목": item["title"].replace("<b>", "").replace("</b>", "").replace("...", ""),
                         "매체": press,
                         "날짜": pub_date,
                         "URL": item["link"]
