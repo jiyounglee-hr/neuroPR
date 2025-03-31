@@ -349,7 +349,7 @@ if page == "📰 뉴스 목록":
                 font-weight: bold;
                 padding: 8px;
                 border: 1px solid #ddd;
-                text-align: center;
+                text-align: left;
             }
             td {
                 padding: 8px;
