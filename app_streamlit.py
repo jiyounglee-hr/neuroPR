@@ -354,7 +354,6 @@ if page == "📰 뉴스 목록":
             td {
                 padding: 8px;
                 border: 1px solid #ddd;
-                text-align: center;
             }
             tr:nth-child(even) {
                 background-color: #f9f9f9;
