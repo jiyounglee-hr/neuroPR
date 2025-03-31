@@ -112,7 +112,8 @@ def crawl_news(keyword, start_date, end_date):
                 "query": keyword,
                 "display": 100,  # 한 번에 표시할 검색 결과 개수
                 "start": (page - 1) * 100 + 1,  # 검색 시작 위치
-                "sort": "date"  # 날짜순 정렬
+                "sort": "date",  # 날짜순 정렬
+                "filter": "all"  # 모든 결과 포함
             }
             
             response = requests.get(url, headers=headers, params=params)
@@ -151,8 +152,11 @@ def crawl_news(keyword, start_date, end_date):
                     except:
                         press = "알 수 없음"
                     
+                    # 제목에서 HTML 태그 제거하고 공백 정리
+                    title = item["title"].replace("<b>", "").replace("</b>", "").strip()
+                    
                     news_list.append({
-                        "제목": item["title"].replace("<b>", "").replace("</b>", "").replace("...", "").strip(),
+                        "제목": title,
                         "매체": press,
                         "날짜": pub_date,
                         "URL": item["link"]
